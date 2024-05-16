@@ -8,12 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 
 public class CategoryController {
-    @Autowired
-    CategoryService categoryService;
 
 
-    @GetMapping("/dashboard/category")
+
+    @GetMapping("/admin/category")
     public String dashboardCategory(){
-        return "";
+        return "/admin/category/index";
+    }
+
+
+
+    @GetMapping("/admin/category/add")
+    public String createCategory(){
+        return "/admin/category/create";
     }
 }
