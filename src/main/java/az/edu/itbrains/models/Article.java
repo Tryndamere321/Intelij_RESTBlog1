@@ -14,7 +14,7 @@ import java.util.Date;
 public class Article {
     @Id
     @GeneratedValue(strategy =  GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String title;
 
     @Column(length = 10000)
