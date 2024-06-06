@@ -2,6 +2,8 @@ package az.edu.itbrains.controllers;
 
 import az.edu.itbrains.dtos.ArticleDtos.ArticleCreateDto;
 import az.edu.itbrains.dtos.ArticleDtos.ArticleDashboardDto;
+import az.edu.itbrains.dtos.ArticleDtos.ArticleDetailDto;
+import az.edu.itbrains.dtos.ArticleDtos.ArticleHomeDto;
 import az.edu.itbrains.dtos.CategoryDtos.CategoryHomeDto;
 import az.edu.itbrains.services.ArticleService;
 import az.edu.itbrains.services.CategoryService;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,11 +31,18 @@ public class ArticleController {
     @Autowired
     private CategoryService categoryService;
 
+
     @GetMapping("/dashboard/article")
     public String index(Model model) {
         List<ArticleDashboardDto> articles = articleService.getDashboardArticles();
         model.addAttribute("articles", articles);
         return "dashboard/article/index";
+    }
+    @GetMapping("/article/detail/{id}")
+    public String detail(Model model,@PathVariable Long id) {
+        ArticleDetailDto articleDetail=articleService.getDetail(id);
+        model.addAttribute("article", articleDetail);
+        return "/detail";
     }
 
     @GetMapping("/dashboard/article/create")
